@@ -55,6 +55,14 @@ contract FundMe {
         // 0.0000034595011638
     }
 
+    function getEntranceFee() public view returns (uint256) {
+        // minimumUSD
+        uint256 minimumUSD = 50 * 10**18;
+        uint256 price = getPrice();
+        uint256 precision = 1 * 10**18;
+        return (minimumUSD * precision) / price;
+    }
+
     modifier onlyOwner() {
         // _;  if run the require after the code
         require(msg.sender == owner, "you are not the owner"); // require msg.sender == owner
